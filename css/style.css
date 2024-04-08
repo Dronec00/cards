@@ -18,3 +18,19 @@ body {
 .cards_item-active {
   transform: rotateY(90deg);
 }
+
+.cards_item-nonactive {
+  transform: rotateY(-90deg);
+}
+
+.cards_item-plus {
+
+}
+
+.cards_item-minus {
+
+}
+
+.cards_item-win {
+
+}
