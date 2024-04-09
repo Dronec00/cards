@@ -16,11 +16,7 @@ body {
 }
 
 .cards_item-active {
-  transform: rotateY(90deg);
-}
-
-.cards_item-nonactive {
-  transform: rotateY(-90deg);
+  transform: rotateY(180deg);
 }
 
 .cards_item-plus {
