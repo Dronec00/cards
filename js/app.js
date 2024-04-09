@@ -37,6 +37,13 @@ function generate (winItem, winId) {
 
 generate(0, null);
 
+function gameover(){
+    cards.forEach(item => {
+        item.classList.remove('cards_item-minus', 'cards_item-plus', 'cards_item-active', 'cards_item-win')
+    });
+    lifes.innerHTML = 3;
+}
+
 cards.forEach((item) => item.addEventListener("click", (e) => {
     let type = item.getAttribute("data-type");
     let id = item.id;
@@ -50,7 +57,7 @@ cards.forEach((item) => item.addEventListener("click", (e) => {
         lifes.innerHTML--;
         if (lifes.innerHTML === "0") {
             alert("loose");
-            lifes.innerHTML = 3;
+            gameover();
         };
         item.classList.add('cards_item-minus');
         item.classList.add('cards_item-active');
@@ -70,9 +77,10 @@ cards.forEach((item) => item.addEventListener("click", (e) => {
         counterwin++;
         cardwin.push(id);
         item.classList.add('cards_item-win');
-        if (counterwin === 100) {
+        item.classList.add('cards_item-active');
+        if (counterwin === 2) {
             alert("WIN");
-            lifes.innerHTML = 3;
+            gameover();
         };
         generate(counterwin, item.id);
     }
