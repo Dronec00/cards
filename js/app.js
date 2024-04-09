@@ -37,40 +37,43 @@ function generate (winItem, winId) {
 
 generate(0, null);
 
-cards.forEach((item) => item.addEventListener("click", (e)=>{
-    item.classList.add('cards_item-active');
+cards.forEach((item) => item.addEventListener("click", (e) => {
     let type = item.getAttribute("data-type");
     let id = item.id;
-    if(cardwin.includes(id)) return; // ничего не делать, если карточку уже угадали
-    if(type === "-"){
-        item.classList.add('cards_item-minus')
+
+    // Убедимся, что все классы удалены перед добавлением нового класса
+    item.classList.remove('cards_item-minus', 'cards_item-plus');
+
+    if (cardwin.includes(id)) return; // Ничего не делать, если карточку уже угадали
+
+    if (type === "-") {
         lifes.innerHTML--;
-        if(lifes.innerHTML === "0"){
+        if (lifes.innerHTML === "0") {
             alert("loose");
             lifes.innerHTML = 3;
         };
-        setTimeout(()=>{
-            document.getElementById(id).classList.remove('cards_item-minus');
-            document.getElementById(id).classList.add('cards_item-active');
-        }, 500)
-        generate(0, null)
+        item.classList.add('cards_item-minus');
+        item.classList.add('cards_item-active');
+            setTimeout(() => {
+                item.classList.remove('cards_item-minus', 'cards_item-active');
+            }, 500);
+        generate(0, null);
     } else if (type === "+") {
-        item.classList.add('cards_item-plus')
-
-        setTimeout(()=>{
-            document.getElementById(id).classList.remove('cards_item-plus');
-            document.getElementById(id).classList.add('cards_item-active');
-        }, 500)
+        item.classList.add('cards_item-plus');
+        item.classList.add('cards_item-active');
+            setTimeout(() => {
+                item.classList.remove('cards_item-plus', 'cards_item-active');
+            }, 500);
         lifes.innerHTML++;
         generate(0, null);
-    } else if (type === "win"){
-        counterwin++
-        cardwin.push(id)
-        item.classList.add('cards_item-win')
-        if(counterwin === 100){
-            alert("WIN")
+    } else if (type === "win") {
+        counterwin++;
+        cardwin.push(id);
+        item.classList.add('cards_item-win');
+        if (counterwin === 100) {
+            alert("WIN");
             lifes.innerHTML = 3;
         };
         generate(counterwin, item.id);
     }
-}))
+}));
