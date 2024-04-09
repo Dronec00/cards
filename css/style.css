@@ -25,13 +25,16 @@ body {
 }
 
 .cards_item-plus {
-
+  background-image: url(/img/heart.jpeg);
+  background-repeat: no-repeat;
 }
 
 .cards_item-minus {
-
+  background-image: url(/img/crossHeart.jpeg);
+  background-repeat: no-repeat;
 }
 
 .cards_item-win {
-
+  background-image: url(/img/win.png);
+  background-repeat: no-repeat;
 }
