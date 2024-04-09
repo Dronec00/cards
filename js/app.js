@@ -8,25 +8,26 @@ function generate (winItem, winId) {
     let minus = 5;
     let plus = 2;
     let win = 2 - winItem;
+
     if(winId){
         let idx = arr.indexOf(winId);
         arr.splice(idx, 1)
     }
 
     for (let i = 0; i < minus; i++) {
-        let k = Math.floor(Math.random()*(arr.length-1));
+        let k = Math.floor(Math.random()*(arr.length));
         document.getElementById(arr[k]).setAttribute('data-type', '-');
-        arr.splice(k, 1)
+        arr.splice(k, 1);
 
     }
     for (let i = 0; i < plus; i++) {
-        let k = Math.floor(Math.random()*(arr.length-1));
+        let k = Math.floor(Math.random()*(arr.length));
         document.getElementById(arr[k]).setAttribute('data-type', '+');
-        arr.splice(k, 1)
+        arr.splice(k, 1);
 
     }
     for (let i = 0; i < win; i++) {
-        let k = Math.floor(Math.random()*(arr.length-1));
+        let k = Math.floor(Math.random()*(arr.length));
         document.getElementById(arr[k]).setAttribute('data-type', 'win');
         arr.splice(k, 1);
     }
@@ -37,17 +38,27 @@ generate(0, null)
 cards.forEach((item) => item.addEventListener("click", (e)=>{
     item.classList.add('cards_item-active');
     let type = item.getAttribute("data-type");
+    let id = item.id;
     console.log(type);
     if(type === "-"){
-        item.classList.add('cards_item-nonactive');
+        item.classList.add('cards_item-minus')
         lifes.innerHTML--;
         if(lifes.innerHTML === "0"){
             alert("loose");
             lifes.innerHTML = 3;
         };
+        setTimeout(()=>{
+            document.getElementById(id).classList.remove('cards_item-minus');
+            document.getElementById(id).classList.add('cards_item-active');
+        }, 500)
         generate(0, null)
     } else if (type === "+") {
-        item.classList.add('cards_item-nonactive');
+        item.classList.add('cards_item-plus')
+
+        setTimeout(()=>{
+            document.getElementById(id).classList.remove('cards_item-plus');
+            document.getElementById(id).classList.add('cards_item-active');
+        }, 500)
         lifes.innerHTML++;
         generate(0, null);
     } else if (type === "win"){
